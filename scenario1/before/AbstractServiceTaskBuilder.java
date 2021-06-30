@@ -17,14 +17,14 @@
 package org.camunda.bpm.model.bpmn.builder;
 
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
-import org.camunda.bpm.model.bpmn.instance.ErrorEventDefinition;
-import org.camunda.bpm.model.bpmn.instance.ServiceTask;
-import org.camunda.bpm.model.bpmn.instance.camunda.CamundaErrorEventDefinition;
+import org.camunda.bpm.model.bpmn.instance.paradigm.activities.ServiceTask;
 
 /**
  * @author Sebastian Menski
  */
 public abstract class AbstractServiceTaskBuilder<B extends AbstractServiceTaskBuilder<B>> extends AbstractTaskBuilder<B, ServiceTask> {
+
+  private final org.camunda.bpm.model.bpmn.builder.CamundaErrorEventDefinition<B> camundaErrorEventDefinition = new org.camunda.bpm.model.bpmn.builder.CamundaErrorEventDefinition<B>(this);
 
   protected AbstractServiceTaskBuilder(BpmnModelInstance modelInstance, ServiceTask element, Class<?> selfType) {
     super(modelInstance, element, selfType);
@@ -57,7 +57,7 @@ public abstract class AbstractServiceTaskBuilder<B extends AbstractServiceTaskBu
   /**
    * Sets the camunda class attribute.
    *
-   * @param camundaClass  the class name to set
+   * @param fullQualifiedClassName  the class name to set
    * @return the builder object
    */
   public B camundaClass(String fullQualifiedClassName) {
@@ -154,8 +154,10 @@ public abstract class AbstractServiceTaskBuilder<B extends AbstractServiceTaskBu
    * @return the error event definition builder object
    */
   public CamundaErrorEventDefinitionBuilder camundaErrorEventDefinition() {
-    ErrorEventDefinition camundaErrorEventDefinition = createInstance(CamundaErrorEventDefinition.class);
-    addExtensionElement(camundaErrorEventDefinition);
-    return new CamundaErrorEventDefinitionBuilder(modelInstance, camundaErrorEventDefinition);
+    return camundaErrorEventDefinition.camundaErrorEventDefinition();
+  }
+
+  public BpmnModelInstance getModelInstance(){
+    return this.modelInstance;
   }
 }

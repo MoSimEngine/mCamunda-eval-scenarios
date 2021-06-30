@@ -17,6 +17,5 @@ model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/builder/AbstractSe
 model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/builder/CamundaErrorEventDefinitionBuilder.java
 model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/impl/BpmnModelConstants.java
 model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/impl/instance/camunda/CamundaErrorEventDefinitionImpl.java
-org/camunda/bpm/model/bpmn/builder/ErrorEventDefinitionCheck.java
 model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/instance/camunda/CamundaErrorEventDefinition.java
 model-api/bpmn-model/src/test/java/org/camunda/bpm/model/bpmn/builder/ProcessBuilderTest.java

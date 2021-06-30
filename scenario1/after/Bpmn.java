@@ -17,6 +17,7 @@
 package org.camunda.bpm.model.bpmn;
 
 import org.camunda.bpm.model.bpmn.builder.ProcessBuilder;
+import org.camunda.bpm.model.bpmn.domain.BpmnDomain;
 import org.camunda.bpm.model.bpmn.impl.BpmnParser;
 import org.camunda.bpm.model.bpmn.impl.instance.bpmndi.BpmnDiagramImpl;
 import org.camunda.bpm.model.bpmn.impl.instance.bpmndi.BpmnEdgeImpl;
@@ -101,6 +102,7 @@ import org.camunda.bpm.model.bpmn.instance.bpmndi.BpmnDiagram;
 import org.camunda.bpm.model.bpmn.instance.bpmndi.BpmnPlane;
 import org.camunda.bpm.model.bpmn.instance.domain.processes.Process;
 import org.camunda.bpm.model.bpmn.instance.paradigm.core.Definitions;
+import org.camunda.bpm.model.bpmn.paradigm.BpmnParadigm;
 import org.camunda.bpm.model.xml.Model;
 import org.camunda.bpm.model.xml.ModelBuilder;
 import org.camunda.bpm.model.xml.ModelException;
