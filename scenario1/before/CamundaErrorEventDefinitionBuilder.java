@@ -17,11 +17,11 @@
 package org.camunda.bpm.model.bpmn.builder;
 
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
-import org.camunda.bpm.model.bpmn.instance.domain.events.advanced.ErrorEventDefinition;
+import org.camunda.bpm.model.bpmn.instance.ErrorEventDefinition;
+import org.camunda.bpm.model.bpmn.instance.ExtensionElements;
+import org.camunda.bpm.model.bpmn.instance.ServiceTask;
 
 public class CamundaErrorEventDefinitionBuilder extends AbstractErrorEventDefinitionBuilder<CamundaErrorEventDefinitionBuilder> {
-
-  private final ErrorEventDefinitionCheck errorEventDefenitionCheck = new ErrorEventDefinitionCheck(this);
 
   public CamundaErrorEventDefinitionBuilder(BpmnModelInstance modelInstance, ErrorEventDefinition element) {
     super(modelInstance, element, CamundaErrorEventDefinitionBuilder.class);
@@ -35,6 +35,6 @@ public class CamundaErrorEventDefinitionBuilder extends AbstractErrorEventDefini
   @SuppressWarnings({ "rawtypes", "unchecked" })
   @Override
   public AbstractServiceTaskBuilder errorEventDefinitionDone() {
-    return errorEventDefenitionCheck.errorEventDefinitionDone();
+    return ((ServiceTask)((ExtensionElements) element.getParentElement()).getParentElement()).builder();
   }
 }
