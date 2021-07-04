@@ -30,6 +30,7 @@ import java.util.List;
 import org.camunda.bpm.model.bpmn.*;
 
 import org.camunda.bpm.model.bpmn.instance.*;
+//: Start of Domain
 import org.camunda.bpm.model.bpmn.instance.domain.events.advanced.BoundaryEvent;
 import org.camunda.bpm.model.bpmn.instance.domain.events.advanced.CompensateEventDefinition;
 import org.camunda.bpm.model.bpmn.instance.domain.events.advanced.ConditionalEventDefinition;
@@ -41,6 +42,9 @@ import org.camunda.bpm.model.bpmn.instance.domain.events.advanced.Signal;
 import org.camunda.bpm.model.bpmn.instance.domain.events.advanced.SignalEventDefinition;
 import org.camunda.bpm.model.bpmn.instance.domain.events.advanced.TimerEventDefinition;
 import org.camunda.bpm.model.bpmn.instance.domain.humaninteraction.UserTask;
+import org.camunda.bpm.model.bpmn.instance.domain.processes.Process;
+//: End of Domain
+//: Start of Paradigm
 import org.camunda.bpm.model.bpmn.instance.paradigm.artifacts.Association;
 import org.camunda.bpm.model.bpmn.instance.paradigm.artifacts.AssociationDirection;
 import org.camunda.bpm.model.bpmn.instance.paradigm.core.BaseElement;
@@ -59,7 +63,19 @@ import org.camunda.bpm.model.bpmn.instance.paradigm.gateways.InclusiveGateway;
 import org.camunda.bpm.model.bpmn.instance.paradigm.looping.MultiInstanceLoopCharacteristics;
 import org.camunda.bpm.model.bpmn.instance.paradigm.messaging.Message;
 import org.camunda.bpm.model.bpmn.instance.paradigm.services.Error;
-import org.camunda.bpm.model.bpmn.instance.domain.processes.Process;
+import org.camunda.bpm.model.bpmn.instance.paradigm.activities.Activity;
+import org.camunda.bpm.model.bpmn.instance.paradigm.activities.BusinessRuleTask;
+import org.camunda.bpm.model.bpmn.instance.paradigm.activities.CallActivity;
+import org.camunda.bpm.model.bpmn.instance.paradigm.activities.ReceiveTask;
+import org.camunda.bpm.model.bpmn.instance.paradigm.activities.ScriptTask;
+import org.camunda.bpm.model.bpmn.instance.paradigm.activities.SendTask;
+import org.camunda.bpm.model.bpmn.instance.paradigm.activities.ServiceTask;
+import org.camunda.bpm.model.bpmn.instance.paradigm.activities.Task;
+import org.camunda.bpm.model.bpmn.instance.paradigm.subprocesses.SubProcess;
+import org.camunda.bpm.model.bpmn.instance.paradigm.subprocesses.Transaction;
+//: End of Paradigm
+
+
 import org.camunda.bpm.model.bpmn.instance.camunda.CamundaErrorEventDefinition;
 import org.camunda.bpm.model.bpmn.instance.camunda.CamundaExecutionListener;
 import org.camunda.bpm.model.bpmn.instance.camunda.CamundaFailedJobRetryTimeCycle;
@@ -71,16 +87,8 @@ import org.camunda.bpm.model.bpmn.instance.camunda.CamundaInputParameter;
 import org.camunda.bpm.model.bpmn.instance.camunda.CamundaOut;
 import org.camunda.bpm.model.bpmn.instance.camunda.CamundaOutputParameter;
 import org.camunda.bpm.model.bpmn.instance.camunda.CamundaTaskListener;
-import org.camunda.bpm.model.bpmn.instance.paradigm.activities.Activity;
-import org.camunda.bpm.model.bpmn.instance.paradigm.activities.BusinessRuleTask;
-import org.camunda.bpm.model.bpmn.instance.paradigm.activities.CallActivity;
-import org.camunda.bpm.model.bpmn.instance.paradigm.activities.ReceiveTask;
-import org.camunda.bpm.model.bpmn.instance.paradigm.activities.ScriptTask;
-import org.camunda.bpm.model.bpmn.instance.paradigm.activities.SendTask;
-import org.camunda.bpm.model.bpmn.instance.paradigm.activities.ServiceTask;
-import org.camunda.bpm.model.bpmn.instance.paradigm.activities.Task;
-import org.camunda.bpm.model.bpmn.instance.paradigm.subprocesses.SubProcess;
-import org.camunda.bpm.model.bpmn.instance.paradigm.subprocesses.Transaction;
+
+
 import org.camunda.bpm.model.xml.Model;
 import org.camunda.bpm.model.xml.instance.ModelElementInstance;
 import org.camunda.bpm.model.xml.type.ModelElementType;
@@ -1590,6 +1598,7 @@ public class ProcessBuilderTest {
     assertThat(camundaInParams.get(0).getCamundaVariables()).isEqualTo("all");
   }
 
+  @Domain
   @Test
   public void testMessageBoundaryEvent() {
     modelInstance = Bpmn.createProcess()
