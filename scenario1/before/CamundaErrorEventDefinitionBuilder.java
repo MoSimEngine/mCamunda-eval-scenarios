@@ -17,9 +17,9 @@
 package org.camunda.bpm.model.bpmn.builder;
 
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
-import org.camunda.bpm.model.bpmn.instance.domain.events.advanced.ErrorEventDefinition;
+import org.camunda.bpm.model.bpmn.instance.ErrorEventDefinition;
 import org.camunda.bpm.model.bpmn.instance.ExtensionElements;
-import org.camunda.bpm.model.bpmn.instance.paradigm.activities.ServiceTask;
+import org.camunda.bpm.model.bpmn.instance.ServiceTask;
 
 public class CamundaErrorEventDefinitionBuilder extends AbstractErrorEventDefinitionBuilder<CamundaErrorEventDefinitionBuilder> {
 
