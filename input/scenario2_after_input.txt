@@ -1,0 +1,2 @@
+model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/impl/instance/dc/FontImpl.java
+model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/instance/dc/Font.java
