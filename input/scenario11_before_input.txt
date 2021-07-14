@@ -1,0 +1,7 @@
+model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/builder/AbstractConditionalEventDefinitionBuilder.java
+model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/impl/BpmnModelConstants.java
+model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/impl/instance/ConditionalEventDefinitionImpl.java
+model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/instance/ConditionalEventDefinition.java
+model-api/bpmn-model/src/test/java/org/camunda/bpm/model/bpmn/BpmnTestConstants.java
+model-api/bpmn-model/src/test/java/org/camunda/bpm/model/bpmn/builder/ProcessBuilderTest.java
+model-api/bpmn-model/src/test/java/org/camunda/bpm/model/bpmn/instance/ConditionalEventDefinitionTest.java
