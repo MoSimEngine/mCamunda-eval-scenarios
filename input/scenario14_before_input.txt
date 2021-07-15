@@ -1,0 +1,5 @@
+model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/Bpmn.java
+model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/builder/AbstractFlowNodeBuilder.java
+model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/impl/BpmnModelConstants.java
+model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/impl/instance/camunda/CamundaIncrementalIntervalsImpl.java
+model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/instance/camunda/CamundaIncrementalIntervals.java
