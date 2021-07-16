@@ -2,6 +2,10 @@
 #1 = files to find
 #2 = where to search
 #3 = where to copy
+#4 = scenario number
+
+mkdir -p "scenario$4/before"
+mkdir -p "scenario$4/after"
 
 cat $1 | sed 's@.*/@@' > input.txt
 while IFS= read -r line
