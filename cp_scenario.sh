@@ -1,19 +1,18 @@
 #!/bin/sh
-#1 = files to find
-#2 = where to search
-#3 = where to copy
-#4 = scenario number
+#1 = where to search
+#2 = before or after
+#3 = scenario number
 
-mkdir -p "scenario$4/before"
-mkdir -p "scenario$4/after"
+mkdir -p "scenario$3/before"
+mkdir -p "scenario$3/after"
 
-cat $1 | sed 's@.*/@@' > input.txt
+cat "input/scenario$3_$2_input.txt" | sed 's@.*/@@' > input.txt
 while IFS= read -r line
 do
-    find $2 -name "$line" -print0 | while read -d $'\0' file
+    find $1 -name "$line" -print0 | while read -d $'\0' file
         do
             #echo "$file"
-            cp "$file" $3
+            cp "$file" "scenario$3/$2"
         done
 done < input.txt
 rm input.txt
