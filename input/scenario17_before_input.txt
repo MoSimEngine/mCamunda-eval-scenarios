@@ -1,0 +1,7 @@
+model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/builder/AbstractBaseElementBuilder.java
+model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/builder/AbstractBoundaryEventBuilder.java
+model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/builder/AbstractEndEventBuilder.java
+model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/builder/AbstractErrorEventDefinitionBuilder.java
+model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/builder/AbstractStartEventBuilder.java
+model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/builder/ErrorEventDefinitionBuilder.java
+model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/impl/BpmnModelConstants.java
