@@ -1,0 +1,6 @@
+model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/builder/AbstractBaseElementBuilder.java
+model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/builder/AbstractCatchEventBuilder.java
+model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/builder/AbstractFlowNodeBuilder.java
+model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/builder/AbstractReceiveTaskBuilder.java
+model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/builder/AbstractSendTaskBuilder.java
+model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/builder/AbstractThrowEventBuilder.java
