@@ -1,0 +1,6 @@
+model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/builder/AbstractBusinessRuleTaskBuilder.java
+model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/builder/AbstractCallActivityBuilder.java
+model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/builder/AbstractFlowNodeBuilder.java
+model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/builder/AbstractSendTaskBuilder.java
+model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/builder/AbstractServiceTaskBuilder.java
+model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/builder/AbstractUserTaskBuilder.java
