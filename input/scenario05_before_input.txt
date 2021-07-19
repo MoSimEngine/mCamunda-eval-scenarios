@@ -4,8 +4,3 @@ model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/builder/AbstractEn
 model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/builder/AbstractErrorEventDefinitionBuilder.java
 model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/builder/AbstractStartEventBuilder.java
 model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/impl/BpmnModelConstants.java
-model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/impl/instance/ErrorImpl.java
-model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/instance/Error.java
-model-api/bpmn-model/src/test/java/org/camunda/bpm/model/bpmn/CamundaExtensionsTest.java
-model-api/bpmn-model/src/test/java/org/camunda/bpm/model/bpmn/builder/ProcessBuilderTest.java
-model-api/bpmn-model/src/test/java/org/camunda/bpm/model/bpmn/instance/ErrorTest.java

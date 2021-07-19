@@ -24,7 +24,6 @@ import org.camunda.bpm.model.bpmn.instance.di.Waypoint;
 import org.camunda.bpm.model.bpmn.instance.domain.events.advanced.BoundaryEvent;
 import org.camunda.bpm.model.bpmn.instance.domain.events.advanced.ErrorEventDefinition;
 import org.camunda.bpm.model.bpmn.instance.domain.events.advanced.EscalationEventDefinition;
-import org.camunda.bpm.model.bpmn.instance.paradigm.flows.FlowNode;
 
 /**
  * @author Sebastian Menski
@@ -168,9 +167,9 @@ public abstract class AbstractBoundaryEventBuilder<B extends AbstractBoundaryEve
   }
 
   @Override
-  protected void setWaypointsWithSourceAndTarget(BpmnEdge edge, FlowNode edgeSource, FlowNode edgeTarget) {
-    BpmnShape source = findBpmnShape(edgeSource);
-    BpmnShape target = findBpmnShape(edgeTarget);
+  protected void setWaypointsWithSourceAndTarget(BpmnEdge edge, Nodes nodes) {
+    BpmnShape source = findBpmnShape(nodes.getEdgeSource());
+    BpmnShape target = findBpmnShape(nodes.getEdgeTarget());
 
     if (source != null && target != null) {
       Bounds sourceBounds = source.getBounds();

@@ -18,7 +18,6 @@ package org.camunda.bpm.model.bpmn.builder;
 
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.bpmn.instance.domain.events.advanced.ErrorEventDefinition;
-import org.camunda.bpm.model.bpmn.instance.paradigm.events.Event;
 
 
 /**
@@ -27,6 +26,8 @@ import org.camunda.bpm.model.bpmn.instance.paradigm.events.Event;
  */
 
 public abstract class AbstractErrorEventDefinitionBuilder<B extends AbstractErrorEventDefinitionBuilder<B>> extends AbstractRootElementBuilder<B, ErrorEventDefinition>{
+
+  private final AbstractParadigmErrorEventDefinitionBuilderDelegate<B> abstractParadigmErrorEventDefinitionBuilderDelegate = new AbstractParadigmErrorEventDefinitionBuilderDelegate<B>(this);
 
   public AbstractErrorEventDefinitionBuilder(BpmnModelInstance modelInstance, ErrorEventDefinition element, Class<?> selfType) {
     super(modelInstance, element, selfType);
@@ -76,6 +77,6 @@ public abstract class AbstractErrorEventDefinitionBuilder<B extends AbstractErro
    */
   @SuppressWarnings({ "rawtypes", "unchecked" })
   public <T extends AbstractFlowNodeBuilder> T errorEventDefinitionDone() {
-    return (T) ((Event) element.getParentElement()).builder();
+    return abstractParadigmErrorEventDefinitionBuilderDelegate.errorEventDefinitionDone();
   }
 }
