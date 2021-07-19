@@ -1,8 +1,5 @@
-model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/builder/AbstractBaseElementParadigmBuilder.java
+model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/builder/AbstractBaseElementBuilder.java
 model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/builder/AbstractCatchEventBuilder.java
 model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/builder/AbstractUserTaskBuilder.java
 model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/impl/instance/camunda/CamundaTaskListenerImpl.java
 model-api/bpmn-model/src/main/java/org/camunda/bpm/model/bpmn/instance/camunda/CamundaTaskListener.java
-model-api/bpmn-model/src/test/java/org/camunda/bpm/model/bpmn/CamundaExtensionsTest.java
-model-api/bpmn-model/src/test/java/org/camunda/bpm/model/bpmn/builder/ProcessBuilderDomainCombinedTest.java
-model-api/bpmn-model/src/test/java/org/camunda/bpm/model/bpmn/instance/camunda/CamundaTaskListenerTest.java

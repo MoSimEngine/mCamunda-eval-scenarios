@@ -26,21 +26,12 @@ import org.camunda.bpm.model.bpmn.instance.domain.events.advanced.SignalEventDef
 /**
  * @author Sebastian Menski
  */
-public abstract class AbstractCatchEventBuilder<B extends  AbstractCatchEventBuilder<B, E>, E extends CatchEvent> extends AbstractEventBuilder<B, E> {
+public abstract class AbstractCatchEventBuilder<B extends  AbstractCatchEventBuilder<B, E>, E extends CatchEvent> extends AbstractParadigmCatchEventBuilder<B, E> {
 
   protected AbstractCatchEventBuilder(BpmnModelInstance modelInstance, E element, Class<?> selfType) {
     super(modelInstance, element, selfType);
   }
 
-  /**
-   * Sets the event to be parallel multiple
-   *
-   * @return the builder object
-   */
-  public B parallelMultiple() {
-    element.isParallelMultiple();
-    return myself;
-  }
 
   /**
    * Sets an event definition for the given message name. If already a message
@@ -71,41 +62,8 @@ public abstract class AbstractCatchEventBuilder<B extends  AbstractCatchEventBui
   }
 
 
-  /**
-   * Sets an event definition for the timer with a time date.
-   *
-   * @param timerDate the time date of the timer
-   * @return the builder object
-   */
-  public B timerWithDate(String timerDate) {
-    element.getEventDefinitions().add(createTimeDate(timerDate));
 
-    return myself;
-  }
 
-  /**
-   * Sets an event definition for the timer with a time duration.
-   *
-   * @param timerDuration the time duration of the timer
-   * @return the builder object
-   */
-  public B timerWithDuration(String timerDuration) {
-    element.getEventDefinitions().add(createTimeDuration(timerDuration));
-
-    return myself;
-  }
-
-  /**
-   * Sets an event definition for the timer with a time cycle.
-   *
-   * @param timerCycle the time cycle of the timer
-   * @return the builder object
-   */
-  public B timerWithCycle(String timerCycle) {
-    element.getEventDefinitions().add(createTimeCycle(timerCycle));
-
-    return myself;
-  }
 
   public CompensateEventDefinitionBuilder compensateEventDefinition() {
     return compensateEventDefinition(null);
