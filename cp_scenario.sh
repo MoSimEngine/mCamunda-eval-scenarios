@@ -5,6 +5,7 @@
 
 mkdir -p "scenario$3/before"
 mkdir -p "scenario$3/after"
+mkdir -p "scenario$3/lang-apply"
 
 cat "input/scenario$3_$2_input.txt" | sed 's@.*/@@' > input.txt
 while IFS= read -r line
