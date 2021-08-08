@@ -24,15 +24,16 @@ import org.camunda.bpm.model.bpmn.instance.di.Waypoint;
 import org.camunda.bpm.model.bpmn.instance.domain.events.advanced.BoundaryEvent;
 import org.camunda.bpm.model.bpmn.instance.domain.events.advanced.ErrorEventDefinition;
 import org.camunda.bpm.model.bpmn.instance.domain.events.advanced.EscalationEventDefinition;
-import org.camunda.bpm.model.bpmn.instance.paradigm.flows.FlowNode;
 
 /**
  * @author Sebastian Menski
  */
 public abstract class AbstractBoundaryEventBuilder<B extends AbstractBoundaryEventBuilder<B>> extends AbstractCatchEventBuilder<B, BoundaryEvent> {
+  private ErrorEventDefinitionBuilderDelegate errorEventDefinitionBuilderDelegate;
 
   protected AbstractBoundaryEventBuilder(BpmnModelInstance modelInstance, BoundaryEvent element, Class<?> selfType) {
     super(modelInstance, element, selfType);
+    errorEventDefinitionBuilderDelegate = new ErrorEventDefinitionBuilderDelegate(modelInstance, element, selfType);
   }
 
   /**
@@ -47,45 +48,7 @@ public abstract class AbstractBoundaryEventBuilder<B extends AbstractBoundaryEve
     return myself;
   }
 
-  /**
-   * Sets a catch all error definition.
-   *
-   * @return the builder object
-   */
-  public B error() {
-    ErrorEventDefinition errorEventDefinition = createInstance(ErrorEventDefinition.class);
-    element.getEventDefinitions().add(errorEventDefinition);
 
-    return myself;
-  }
-
-  /**
-   * Sets an error definition for the given error code. If already an error
-   * with this code exists it will be used, otherwise a new error is created.
-   *
-   * @param errorCode the code of the error
-   * @return the builder object
-   */
-  public B error(String errorCode) {
-    return error(errorCode, null);
-  }
-
-  /**
-   * Sets an error definition for the given error code. If already an error
-   * with this code exists it will be used, otherwise a new error with the 
-   * given error message is created.
-   *
-   * @param errorCode the code of the error
-   * @param errorMessage the error message that is used when a new error needs
-   *        to be created
-   * @return the builder object
-   */
-  public B error(String errorCode, String errorMessage) {
-    ErrorEventDefinition errorEventDefinition = createErrorEventDefinition(errorCode, errorMessage);
-    element.getEventDefinitions().add(errorEventDefinition);
-    
-    return myself;
-  }
 
   /**
    * Creates an error event definition with an unique id
@@ -94,7 +57,7 @@ public abstract class AbstractBoundaryEventBuilder<B extends AbstractBoundaryEve
    * @return the error event definition builder object
    */
   public ErrorEventDefinitionBuilder errorEventDefinition(String id) {
-    ErrorEventDefinition errorEventDefinition = createEmptyErrorEventDefinition();
+    ErrorEventDefinition errorEventDefinition = errorEventDefinitionBuilderDelegate.createEmptyErrorEventDefinition();
     if (id != null) {
       errorEventDefinition.setId(id);
     }
@@ -110,7 +73,7 @@ public abstract class AbstractBoundaryEventBuilder<B extends AbstractBoundaryEve
    * @return the error event definition builder object
    */
   public ErrorEventDefinitionBuilder errorEventDefinition() {
-    ErrorEventDefinition errorEventDefinition = createEmptyErrorEventDefinition();
+    ErrorEventDefinition errorEventDefinition = errorEventDefinitionBuilderDelegate.createEmptyErrorEventDefinition();
     element.getEventDefinitions().add(errorEventDefinition);
     return new ErrorEventDefinitionBuilder(modelInstance, errorEventDefinition);
   }
@@ -168,9 +131,9 @@ public abstract class AbstractBoundaryEventBuilder<B extends AbstractBoundaryEve
   }
 
   @Override
-  protected void setWaypointsWithSourceAndTarget(BpmnEdge edge, FlowNode edgeSource, FlowNode edgeTarget) {
-    BpmnShape source = findBpmnShape(edgeSource);
-    BpmnShape target = findBpmnShape(edgeTarget);
+  protected void setWaypointsWithSourceAndTarget(BpmnEdge edge, Nodes nodes) {
+    BpmnShape source = findBpmnShape(nodes.getEdgeSource());
+    BpmnShape target = findBpmnShape(nodes.getEdgeTarget());
 
     if (source != null && target != null) {
       Bounds sourceBounds = source.getBounds();
