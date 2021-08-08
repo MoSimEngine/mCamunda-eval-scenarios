@@ -16,6 +16,14 @@
  */
 package org.camunda.bpm.model.bpmn.builder;
 // PARADIGM
+import org.camunda.bpm.model.bpmn.instance.bpmndi.BpmnShape;
+import org.camunda.bpm.model.bpmn.instance.paradigm.activities.BusinessRuleTask;
+import org.camunda.bpm.model.bpmn.instance.paradigm.activities.CallActivity;
+import org.camunda.bpm.model.bpmn.instance.paradigm.activities.ReceiveTask;
+import org.camunda.bpm.model.bpmn.instance.paradigm.activities.ScriptTask;
+import org.camunda.bpm.model.bpmn.instance.paradigm.activities.SendTask;
+import org.camunda.bpm.model.bpmn.instance.paradigm.activities.ServiceTask;
+import org.camunda.bpm.model.bpmn.instance.paradigm.events.EndEvent;
 import org.camunda.bpm.model.bpmn.instance.paradigm.events.EventDefinition;
 import org.camunda.bpm.model.bpmn.instance.paradigm.flows.FlowNode;
 
@@ -29,12 +37,119 @@ import org.camunda.bpm.model.bpmn.instance.domain.humaninteraction.UserTask;
 
 import org.camunda.bpm.model.bpmn.BpmnModelException;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
+import org.camunda.bpm.model.bpmn.instance.paradigm.gateways.EventBasedGateway;
+import org.camunda.bpm.model.bpmn.instance.paradigm.gateways.ExclusiveGateway;
+import org.camunda.bpm.model.bpmn.instance.paradigm.gateways.InclusiveGateway;
+import org.camunda.bpm.model.bpmn.instance.paradigm.gateways.ParallelGateway;
+import org.camunda.bpm.model.bpmn.instance.paradigm.subprocesses.SubProcess;
+import org.camunda.bpm.model.bpmn.instance.paradigm.subprocesses.Transaction;
 
 /**
  * @author Sebastian Menski
  */
 public abstract class AbstractFlowNodeBuilder<B extends AbstractFlowNodeBuilder<B, E>, E extends FlowNode> extends ParadigmAbstractFlowNodeBuilder<B, E> {
 
+  public ServiceTaskBuilder serviceTask() {
+    return createTargetBuilder(ServiceTask.class);
+  }
+
+  public ServiceTaskBuilder serviceTask(String id) {
+    return createTargetBuilder(ServiceTask.class, id);
+  }
+
+  public SendTaskBuilder sendTask() {
+    return createTargetBuilder(SendTask.class);
+  }
+
+  public SendTaskBuilder sendTask(String id) {
+    return createTargetBuilder(SendTask.class, id);
+  }
+
+  public BusinessRuleTaskBuilder businessRuleTask() {
+    return createTargetBuilder(BusinessRuleTask.class);
+  }
+
+  public BusinessRuleTaskBuilder businessRuleTask(String id) {
+    return createTargetBuilder(BusinessRuleTask.class, id);
+  }
+
+  public ScriptTaskBuilder scriptTask() {
+    return createTargetBuilder(ScriptTask.class);
+  }
+
+  public ScriptTaskBuilder scriptTask(String id) {
+    return createTargetBuilder(ScriptTask.class, id);
+  }
+
+  public ReceiveTaskBuilder receiveTask() {
+    return createTargetBuilder(ReceiveTask.class);
+  }
+
+  public ReceiveTaskBuilder receiveTask(String id) {
+    return createTargetBuilder(ReceiveTask.class, id);
+  }
+
+  public EndEventBuilder endEvent() {
+    return createTarget(EndEvent.class).builder();
+  }
+
+  public EndEventBuilder endEvent(String id) {
+    return createTarget(EndEvent.class, id).builder();
+  }
+
+  public ParallelGatewayBuilder parallelGateway() {
+    return createTarget(ParallelGateway.class).builder();
+  }
+
+  public ParallelGatewayBuilder parallelGateway(String id) {
+    return createTarget(ParallelGateway.class, id).builder();
+  }
+
+  public ExclusiveGatewayBuilder exclusiveGateway() {
+    return createTarget(ExclusiveGateway.class).builder();
+  }
+
+  public InclusiveGatewayBuilder inclusiveGateway() {
+    return createTarget(InclusiveGateway.class).builder();
+  }
+
+  public EventBasedGatewayBuilder eventBasedGateway() {
+    return createTarget(EventBasedGateway.class).builder();
+  }
+
+  public ExclusiveGatewayBuilder exclusiveGateway(String id) {
+    return createTarget(ExclusiveGateway.class, id).builder();
+  }
+
+  public InclusiveGatewayBuilder inclusiveGateway(String id) {
+    return createTarget(InclusiveGateway.class, id).builder();
+  }
+
+  public CallActivityBuilder callActivity() {
+    return createTarget(CallActivity.class).builder();
+  }
+
+  public CallActivityBuilder callActivity(String id) {
+    return createTarget(CallActivity.class, id).builder();
+  }
+
+  public SubProcessBuilder subProcess() {
+    return createTarget(SubProcess.class).builder();
+  }
+
+  public SubProcessBuilder subProcess(String id) {
+    return createTarget(SubProcess.class, id).builder();
+  }
+
+  public TransactionBuilder transaction() {
+    Transaction transaction = createTarget(Transaction.class);
+    return new TransactionBuilder(modelInstance, transaction);
+  }
+
+  public TransactionBuilder transaction(String id) {
+    Transaction transaction = createTarget(Transaction.class, id);
+    return new TransactionBuilder(modelInstance, transaction);
+  }
 
   protected AbstractFlowNodeBuilder(BpmnModelInstance modelInstance, E element, Class<?> selfType) {
     super(modelInstance, element, selfType);
@@ -99,5 +214,37 @@ public abstract class AbstractFlowNodeBuilder<B extends AbstractFlowNodeBuilder<
 
   public IntermediateThrowEventBuilder intermediateThrowEvent(String id) {
     return createTarget(IntermediateThrowEvent.class, id).builder();
+  }
+
+
+  protected <T extends FlowNode> T createTarget(Class<T> typeClass) {
+    return createTarget(typeClass, null);
+  }
+
+  protected <T extends FlowNode> T createTarget(Class<T> typeClass, String identifier) {
+    T target = createSibling(typeClass, identifier);
+
+    BpmnShape targetBpmnShape = createBpmnShape(target);
+    setCoordinates(targetBpmnShape);
+    connectTarget(target);
+    resizeSubProcess(targetBpmnShape);
+    return target;
+  }
+
+  protected <T extends AbstractFlowNodeBuilder, F extends FlowNode> T createTargetBuilder(Class<F> typeClass) {
+    return createTargetBuilder(typeClass, null);
+  }
+
+  @SuppressWarnings("unchecked")
+  protected <T extends AbstractFlowNodeBuilder, F extends FlowNode> T createTargetBuilder(Class<F> typeClass, String id) {
+    AbstractFlowNodeBuilder builder = createTarget(typeClass, id).builder();
+
+    if (compensationStarted) {
+      // pass on current boundary event to return after compensationDone call
+      builder.compensateBoundaryEvent = compensateBoundaryEvent;
+    }
+
+    return (T) builder;
+
   }
 }
