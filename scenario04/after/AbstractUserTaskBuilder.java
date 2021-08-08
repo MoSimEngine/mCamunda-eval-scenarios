@@ -139,7 +139,7 @@ public abstract class AbstractUserTaskBuilder<B extends AbstractUserTaskBuilder<
   /**
    * Sets the camunda form handler class attribute.
    *
-   * @param camundaFormHandlerClass  the class name of the form handler
+   * @param fullQualifiedClassName  the class name of the form handler
    * @return the builder object
    */
   public B camundaFormHandlerClass(String fullQualifiedClassName) {
@@ -184,7 +184,7 @@ public abstract class AbstractUserTaskBuilder<B extends AbstractUserTaskBuilder<
    * Add a class based task listener with specified event name
    *
    * @param eventName - event names to listen to
-   * @param fullQualifiedClassName - a string representing a class
+   * @param listenerClass - a string representing a class
    * @return the builder object
    */
   @SuppressWarnings("rawtypes")
