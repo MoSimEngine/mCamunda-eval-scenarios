@@ -129,6 +129,7 @@ public abstract class AbstractStartEventBuilder<B extends AbstractStartEventBuil
     return error(errorCode, null);
   }
   
+  
   /**
    * Sets an error definition for the given error code. If already an error
    * with this code exists it will be used, otherwise a new error is created
