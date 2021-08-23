@@ -42,7 +42,7 @@ public abstract class AbstractFlowNodeBuilder<B extends AbstractFlowNodeBuilder<
 
 
   public AbstractFlowNodeBuilder compensationDone(){
-    if (compensateBoundaryEvent != null && compensateBoundaryEvent instanceof BoundaryEvent) {
+    if (compensateBoundaryEvent instanceof BoundaryEvent) {
       return ((BoundaryEvent)compensateBoundaryEvent).getAttachedTo().builder();
     }
     else {

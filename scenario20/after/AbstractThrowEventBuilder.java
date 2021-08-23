@@ -22,7 +22,7 @@ import org.camunda.bpm.model.bpmn.instance.domain.events.advanced.EscalationEven
 import org.camunda.bpm.model.bpmn.instance.domain.events.advanced.MessageEventDefinition;
 import org.camunda.bpm.model.bpmn.instance.domain.events.advanced.SignalEventDefinition;
 import org.camunda.bpm.model.bpmn.instance.paradigm.events.ThrowEvent;
-
+import org.camunda.bpm.model.bpmn.instance.EventDefinition;
 /**
  * @author Sebastian Menski
  */
@@ -41,7 +41,7 @@ public abstract class AbstractThrowEventBuilder<B extends AbstractThrowEventBuil
    */
   public B message(String messageName) {
     MessageEventDefinition messageEventDefinition = createMessageEventDefinition(messageName);
-    element.getEventDefinitions().add(messageEventDefinition);
+    addEventDefinition( messageEventDefinition);
 
     return myself;
   }
@@ -66,10 +66,9 @@ public abstract class AbstractThrowEventBuilder<B extends AbstractThrowEventBuil
   public MessageEventDefinitionBuilder messageEventDefinition(String id) {
     MessageEventDefinition messageEventDefinition = createEmptyMessageEventDefinition();
     if (id != null) {
-      messageEventDefinition.setId(id);
+      setId(messageEventDefinition, id);
     }
-
-    element.getEventDefinitions().add(messageEventDefinition);
+    addEventDefinition( messageEventDefinition);
     return new MessageEventDefinitionBuilder(modelInstance, messageEventDefinition);
   }
 
@@ -82,8 +81,7 @@ public abstract class AbstractThrowEventBuilder<B extends AbstractThrowEventBuil
    */
   public B signal(String signalName) {
     SignalEventDefinition signalEventDefinition = createSignalEventDefinition(signalName);
-    element.getEventDefinitions().add(signalEventDefinition);
-
+    addEventDefinition( signalEventDefinition);
     return myself;
   }
 
@@ -97,7 +95,7 @@ public abstract class AbstractThrowEventBuilder<B extends AbstractThrowEventBuil
    */
   public SignalEventDefinitionBuilder signalEventDefinition(String signalName) {
     SignalEventDefinition signalEventDefinition = createSignalEventDefinition(signalName);
-    element.getEventDefinitions().add(signalEventDefinition);
+    addEventDefinition( signalEventDefinition);
 
     return new SignalEventDefinitionBuilder(modelInstance, signalEventDefinition);
   }
@@ -112,7 +110,7 @@ public abstract class AbstractThrowEventBuilder<B extends AbstractThrowEventBuil
    */
   public B escalation(String escalationCode) {
     EscalationEventDefinition escalationEventDefinition = createEscalationEventDefinition(escalationCode);
-    element.getEventDefinitions().add(escalationEventDefinition);
+    addEventDefinition( escalationEventDefinition);
 
     return myself;
   }
@@ -124,10 +122,17 @@ public abstract class AbstractThrowEventBuilder<B extends AbstractThrowEventBuil
   public CompensateEventDefinitionBuilder compensateEventDefinition(String id) {
     CompensateEventDefinition eventDefinition = createInstance(CompensateEventDefinition.class);
     if (id != null) {
-      eventDefinition.setId(id);
+      setId(eventDefinition, id);
     }
 
-    element.getEventDefinitions().add(eventDefinition);
+    addEventDefinition( eventDefinition);
+
     return new CompensateEventDefinitionBuilder(modelInstance, eventDefinition);
   }
+  private void addEventDefinition(EventDefinition eventDefinition) {
+    element.getEventDefinitions().add(eventDefinition);
+  }
+  private void setId(EventDefinition eventDefinition, String id) {
+    eventDefinition.setId(id);
+    }
 }
