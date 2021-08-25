@@ -22,6 +22,7 @@ import org.camunda.bpm.model.bpmn.instance.domain.events.advanced.CompensateEven
 import org.camunda.bpm.model.bpmn.instance.domain.events.advanced.ConditionalEventDefinition;
 import org.camunda.bpm.model.bpmn.instance.domain.events.advanced.MessageEventDefinition;
 import org.camunda.bpm.model.bpmn.instance.domain.events.advanced.SignalEventDefinition;
+import org.camunda.bpm.model.bpmn.instance.EventDefinition;
 
 /**
  * @author Sebastian Menski
@@ -42,7 +43,7 @@ public abstract class AbstractCatchEventBuilder<B extends  AbstractCatchEventBui
    */
   public B message(String messageName) {
     MessageEventDefinition messageEventDefinition = createMessageEventDefinition(messageName);
-    element.getEventDefinitions().add(messageEventDefinition);
+    addEventDefinition(messageEventDefinition);
 
     return myself;
   }
@@ -56,7 +57,7 @@ public abstract class AbstractCatchEventBuilder<B extends  AbstractCatchEventBui
    */
   public B signal(String signalName) {
     SignalEventDefinition signalEventDefinition = createSignalEventDefinition(signalName);
-    element.getEventDefinitions().add(signalEventDefinition);
+    addEventDefinition(signalEventDefinition);
 
     return myself;
   }
@@ -74,8 +75,7 @@ public abstract class AbstractCatchEventBuilder<B extends  AbstractCatchEventBui
     if (id != null) {
       eventDefinition.setId(id);
     }
-
-    element.getEventDefinitions().add(eventDefinition);
+    addEventDefinition( eventDefinition);
     return new CompensateEventDefinitionBuilder(modelInstance, eventDefinition);
   }
 
@@ -88,8 +88,7 @@ public abstract class AbstractCatchEventBuilder<B extends  AbstractCatchEventBui
     if (id != null) {
       eventDefinition.setId(id);
     }
-
-    element.getEventDefinitions().add(eventDefinition);
+    addEventDefinition( eventDefinition);
     return new ConditionalEventDefinitionBuilder(modelInstance, eventDefinition);
   }
 
@@ -98,4 +97,7 @@ public abstract class AbstractCatchEventBuilder<B extends  AbstractCatchEventBui
     return myself;
   }
 
+  private void addEventDefinition(EventDefinition eventDefinition) {
+    element.getEventDefinitions().add(eventDefinition);
+  }
 }
